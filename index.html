@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Facebook Cards -->
+  <meta property="og:description" content="Free Resume Parser and Extractor of interesting information" />
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Free Resume Parser" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/yeti/bootstrap.min.css">
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+  <title>Free Resume Parser</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">
+      Free Resume Parser
+    </a>
+  </nav>
+
+  <div class="container-fluid">
+    <br>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 offset-md-3">
+        <h2 class="text-center">Free Resume Parser</h1>
+        <p class="text-center">Upload multiple resumses in different formats and extract structured data.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 offset-md-3">
+        <hr>
+        <form method="POST" enctype="multipart/form-data" action="/">
+          <input type="hidden" name="csrfmiddlewaretoken" value="ABESTKTt7KuPL4GD">
+          <div id="resume" class="form-group">
+            <div class="">
+              <input type="file" name="resumes" multiple required id="input_resumes">
+            </div>
+          </div>
+
+          <button type="submit" id="upload" name="upload" class="btn btn-primary">Upload Resumes</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
