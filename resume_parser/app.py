@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 
+from resume_parser.resume_parser import ResumeParser
+
 app = Flask(__name__)
 
 
@@ -16,7 +18,6 @@ def upload():
 
   if request.method == 'POST':
     f = request.files['the_file']
-    # parse
-    # copy to s3
+    resumes_data = ResumeParser().parse(resumes)
 
-    return render_template('uploaded.html')
+    return render_template('uploaded.html', resumes_data=resumes_data)

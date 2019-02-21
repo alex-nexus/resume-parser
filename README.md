@@ -3,6 +3,7 @@
 # start the server
 ```
 FLASK_APP=run.py flask run
+FLASK_APP=run.py FLASK_ENV=development flask run
 ```
 
 ## reading
