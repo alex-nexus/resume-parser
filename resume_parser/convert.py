@@ -9,21 +9,21 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 
 
-def convert_resume_to_text(resume):
+def convert_resume_to_text(resume_file):
   '''
   Wrapper function to detect the file extension and call text extraction function accordingly
 
   :param file_path: path of file of which text is to be extracted
   :param extension: extension of file `file_name`
   '''
-  filename = resume.filename
-  extension = os.path.splitext(resume.filename)[1]
+  filename = resume_file.filename
+  extension = os.path.splitext(resume_file.filename)[1]
 
   text = ''
   if extension == '.pdf':
-    text = ' '.join([page for page in convert_pdf_to_text(resume)])
+    text = ' '.join([page for page in convert_pdf_to_text(resume_file)])
   elif extension == '.docx' or extension == '.doc':
-    text = convert_doc_to_text(resume)
+    text = convert_doc_to_text(resume_file)
   return ' '.join(text.split())
 
 # private

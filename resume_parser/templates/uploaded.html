@@ -1,7 +1,57 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div>
-  uploaded
+
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <table class="table table-bordered table-sm table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <td>Name, Email</td>
+            <td>GitHub</td>
+            <td>Linkedin</td>
+            <td>Educations</td>
+            <td>Experiences</td>
+            <td>Skills</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for resume in resumes %}
+            <tr>
+              <td>
+                <div>{{ resume['name'] }}</div>
+                <div>{{ resume['email'] }}</div>
+              </td>
+              <td>{{ resume['github_url'] }}</td>
+              <td>{{ resume['linkedin_url'] }}</td>
+              <td>
+                <ul>
+                {% for education in resume['educations'] %}
+                  <li>{{ education }}</li>
+                {% endfor %}
+                </ul>                
+              </td>
+              <td>
+                <ul>
+                {% for experience in resume['experiences'] %}
+                  <li>{{ experience }}</li>
+                {% endfor %}
+                </ul>
+              </td>
+              <td>
+                {% for skill in resume['skills'] %}
+                  <h5><span class="badge badge-info">{{ skill }}</span></h5>
+                {% endfor %}
+              </td>
+              <td></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 {% endblock %}

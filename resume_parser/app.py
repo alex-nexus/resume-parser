@@ -16,7 +16,7 @@ def upload():
   app.logger.info('POST upload')
 
   if request.method == 'POST':
-    resumes = request.files.getlist("resumes[]")
-    resumes_data = ResumeParser().parse(resumes)
-    app.logger.info(resumes_data)
-    return render_template('uploaded.html', resumes_data=resumes_data)
+    resume_files = request.files.getlist("resumes[]")
+    resumes = ResumeParser().parse(resume_files)
+    app.logger.info(resumes)
+    return render_template('uploaded.html', resumes=resumes)
