@@ -1,5 +1,9 @@
 # Resume Parser
 
+#
+```
+python -m spacy download en_core_web_sm
+```
 # start the server
 ```
 FLASK_APP=run.py flask run

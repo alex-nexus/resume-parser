@@ -8,7 +8,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
   app.logger.info('GET index')
-
   return render_template('index.html')
 
 
@@ -17,7 +16,7 @@ def upload():
   app.logger.info('POST upload')
 
   if request.method == 'POST':
-    f = request.files['the_file']
+    resumes = request.files.getlist("resumes[]")
     resumes_data = ResumeParser().parse(resumes)
-
+    app.logger.info(resumes_data)
     return render_template('uploaded.html', resumes_data=resumes_data)
