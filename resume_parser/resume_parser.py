@@ -1,32 +1,21 @@
 import multiprocessing as mp
-import spacy
-from spacy.matcher import Matcher
 
 from resume_parser.convert import convert_resume_to_text
 from resume_parser.extract import *
 
 
 class ResumeParser:
-  def __init__(self):
-    self.__nlp = spacy.load('en_core_web_sm')
-    self.__matcher = Matcher(self.__nlp.vocab)
-
   def parse(self, resumes):
-    return [self.parse_one(resume) for resume in resumes]
-    # pool = mp.Pool(mp.cpu_count())
-    # jobs = [pool.apply_async(self.parse_one, args=(resume_path,)) for resume_path in resume_paths]
-    # return [job.get() for job in jobs]
+    texts = [convert_resume_to_text(resume) for resume in resumes]
+    pool = mp.Pool(processes=4)
+    return pool.map(self.parse_one, texts)
 
-  def parse_one(self, resume):
-    text = convert_resume_to_text(resume)
-    doc = self.__nlp(text)
-    noun_chunks = list(doc.noun_chunks)
-
+  def parse_one(self, text):
     return {
-        'name': extract_name(doc, matcher=self.__matcher),
+        'name': extract_name(text),
         'email': extract_email(text),
         'mobile': extract_mobile_number(text),
-        'skills': extract_skills(doc, noun_chunks),
-        'education': extract_education([sent.string.strip() for sent in doc.sents]),
+        'skills': extract_skills(text),
+        'education': extract_education(text),
         'experience': extract_experience(text)
     }
