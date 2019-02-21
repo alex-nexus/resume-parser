@@ -3,9 +3,9 @@ import os
 import docx2txt
 
 from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
-from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 
 
@@ -29,18 +29,19 @@ def convert_resume_to_text(resume_file):
 # private
 
 
-def convert_pdf_to_text(pdf_path):
+def convert_pdf_to_text(resume_file):
   '''
   Helper function to extract the plain text from .pdf files
 
-  :param pdf_path: path to PDF file to be extracted
+  :param resume_file: FileStorage of PDF file to be converted
   :return: iterator of string of extracted text
   '''
   # https://www.blog.pythonlibrary.org/2018/05/03/exporting-data-from-pdfs-with-python/
-  with open(pdf_path, 'rb') as fh:
-    for page in PDFPage.get_pages(fh,
-                                  caching=True,
-                                  check_extractable=True):
+  tmp_file_path = '/tmp/' + resume_file.filename
+  resume_file.save(tmp_file_path)
+
+  with open(tmp_file_path, 'rb') as fh:
+    for page in PDFPage.get_pages(fh, caching=True, check_extractable=True):
       resource_manager = PDFResourceManager()
       fake_file_handle = io.StringIO()
       converter = TextConverter(resource_manager, fake_file_handle, codec='utf-8', laparams=LAParams())
