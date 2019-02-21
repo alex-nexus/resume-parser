@@ -5,6 +5,7 @@ cymem==2.0.2
 cytoolz==0.9.0.1
 dill==0.2.9
 doc2text==0.2.4
+docx2txt==0.7
 Flask==1.0.2
 future==0.17.1
 idna==2.8
@@ -17,6 +18,7 @@ msgpack-numpy==0.4.3.2
 murmurhash==1.0.2
 nltk==3.4
 numpy==1.16.1
+pandas==0.24.1
 pdfminer.six==20181108
 Pillow==5.4.1
 plac==0.9.6
@@ -24,6 +26,8 @@ preshed==2.0.1
 pycryptodome==3.7.3
 PyPDF2==1.26.0
 pytesseract==0.2.6
+python-dateutil==2.8.0
+pytz==2018.9
 regex==2018.1.10
 requests==2.21.0
 scipy==1.2.1
