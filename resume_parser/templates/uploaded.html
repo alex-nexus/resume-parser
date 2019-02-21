@@ -4,6 +4,11 @@
 
 <div class="container-fluid">
   <br>
+  <a class="" href="/">
+    <div class="btn btn-primary">Upload New Resumes</div>
+  </a>
+  <br>
+  <br>
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <table class="table table-bordered table-sm table-hover">
@@ -32,7 +37,7 @@
                 {% for education in resume['educations'] %}
                   <li>{{ education }}</li>
                 {% endfor %}
-                </ul>                
+                </ul>
               </td>
               <td>
                 <ul>
@@ -43,7 +48,7 @@
               </td>
               <td>
                 {% for skill in resume['skills'] %}
-                  <h5><span class="badge badge-info">{{ skill }}</span></h5>
+                  <span class="badge badge-info">{{ skill }}</span>
                 {% endfor %}
               </td>
               <td></td>
