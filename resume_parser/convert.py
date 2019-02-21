@@ -1,4 +1,12 @@
+import io
 import os
+import docx2txt
+
+from pdfminer.converter import TextConverter
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
 
 
 def convert_resume_to_text(resume_path):
