@@ -5,11 +5,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+  app.logger.info('GET index')
+
   return render_template('index.html')
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
+  app.logger.info('POST upload')
+
   if request.method == 'POST':
     f = request.files['the_file']
     # parse
