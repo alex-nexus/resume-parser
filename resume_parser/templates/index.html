@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 offset-md-3">
+      <h2 class="text-center">Free Resume Parser</h1>
+      <p class="text-center">Upload multiple resumses in different formats and extract structured data.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 offset-md-3">
+      <hr>
+      <form method="POST" enctype="multipart/form-data" action="/upload">
+        <input type="hidden" name="csrfmiddlewaretoken" value="ABESTKTt7KuPL4GD">
+        <div id="resume" class="form-group">
+          <div class="">
+            <input type="file" name="resumes" multiple required id="input_resumes">
+          </div>
+        </div>
+
+        <button type="submit" id="upload" name="upload" class="btn btn-primary">Upload Resumes</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
