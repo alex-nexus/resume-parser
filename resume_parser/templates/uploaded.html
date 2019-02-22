@@ -14,13 +14,15 @@
       <table class="table table-bordered table-sm table-hover">
         <thead class="thead-dark">
           <tr>
-            <td>Name, Email</td>
-            <td>GitHub</td>
-            <td>Linkedin</td>
-            <td>Educations</td>
-            <td>Experiences</td>
-            <td>Skills</td>
-            <td>Actions</td>
+            <th>Name, Email</th>
+            <th>GitHub, Linkedin</th>
+            <th>Educations</th>
+            <th>Experiences</th>
+            <th class="w-25">Skills</th>
+            {% if keywords %}
+              <th>Keywords</th>
+            {% endif %}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -30,8 +32,10 @@
                 <div>{{ resume['name'] }}</div>
                 <div>{{ resume['email'] }}</div>
               </td>
-              <td>{{ resume['github_url'] }}</td>
-              <td>{{ resume['linkedin_url'] }}</td>
+              <td>
+                {{ resume['github_url'] }}
+                {{ resume['linkedin_url'] }}
+              </td>
               <td>
                 <ul>
                 {% for education in resume['educations'] %}
@@ -51,6 +55,15 @@
                   <span class="badge badge-info">{{ skill }}</span>
                 {% endfor %}
               </td>
+              {% if keywords %}
+                <td>
+                  <ul>
+                  {% for keyword in keywords.split(',') %}
+                    <li>{{ keyword }}: </li>
+                  {% endfor %}
+                  </ul>
+                </td>
+              {% endif %}
               <td></td>
             </tr>
           {% endfor %}
