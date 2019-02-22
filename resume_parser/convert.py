@@ -31,7 +31,7 @@ def convert_resume_to_text(resume_file):
 # private
 
 
-def convert_pdf_to_text(resume_file):
+def convert_pdf_to_text(pdf_file):
   '''
   Helper function to extract the plain text from .pdf files
 
@@ -39,8 +39,8 @@ def convert_pdf_to_text(resume_file):
   :return: iterator of string of extracted text
   '''
   # https://www.blog.pythonlibrary.org/2018/05/03/exporting-data-from-pdfs-with-python/
-  tmp_file_path = '/tmp/' + resume_file.filename
-  resume_file.save(tmp_file_path)
+  tmp_file_path = '/tmp/' + pdf_file.filename
+  pdf_file.save(tmp_file_path)
 
   with open(tmp_file_path, 'rb') as fh:
     for page in PDFPage.get_pages(fh, caching=True, check_extractable=True):
@@ -58,13 +58,13 @@ def convert_pdf_to_text(resume_file):
       fake_file_handle.close()
 
 
-def convert_doc_to_text(doc_path):
+def convert_doc_to_text(doc_file):
   '''
   Helper function to extract plain text from .doc or .docx files
 
   :param doc_path: path to .doc or .docx file to be extracted
   :return: string of extracted text
   '''
-  temp = docx2txt.process(doc_path)
+  temp = docx2txt.process(doc_file)
   text = [line.replace('\t', ' ') for line in temp.split('\n') if line]
   return ' '.join(text)

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from resume_parser.parser import Parser
+from resume_parser.parser import parse_batch
 
 app = Flask(__name__)
 
@@ -17,6 +17,6 @@ def upload():
 
   if request.method == 'POST':
     resume_files = request.files.getlist("resumes[]")
-    resumes = Parser().parse(resume_files)
+    resumes = parse_batch(resume_files)
     app.logger.info(resumes)
     return render_template('uploaded.html', resumes=resumes)
