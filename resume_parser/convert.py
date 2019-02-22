@@ -21,11 +21,12 @@ def convert_to_text(resume_file):
 
   text = ''
   if extension == '.pdf':
-    text = ' '.join([page for page in convert_pdf_to_text(resume_file)])
+    text = convert_pdf_to_text(resume_file)
   elif extension == '.docx' or extension == '.doc':
     text = convert_doc_to_text(resume_file)
   elif extension == '.txt':
-    text = text
+    text = convert_txt_to_text(resume_file)
+
   return ' '.join(text.split())
 
 # private
@@ -42,6 +43,7 @@ def convert_pdf_to_text(pdf_file):
   tmp_file_path = '/tmp/' + pdf_file.filename
   pdf_file.save(tmp_file_path)
 
+  text = ''
   with open(tmp_file_path, 'rb') as fh:
     for page in PDFPage.get_pages(fh, caching=True, check_extractable=True):
       resource_manager = PDFResourceManager()
@@ -50,12 +52,14 @@ def convert_pdf_to_text(pdf_file):
       page_interpreter = PDFPageInterpreter(resource_manager, converter)
       page_interpreter.process_page(page)
 
-      text = fake_file_handle.getvalue()
-      yield text
+      page_text = fake_file_handle.getvalue()
+      text += page_text
 
       # close open handles
       converter.close()
       fake_file_handle.close()
+
+  return text
 
 
 def convert_doc_to_text(doc_file):
@@ -67,4 +71,13 @@ def convert_doc_to_text(doc_file):
   '''
   temp = docx2txt.process(doc_file)
   text = [line.replace('\t', ' ') for line in temp.split('\n') if line]
+  return ' '.join(text)
+
+
+def convert_txt_to_text(txt_file):
+  return clean_text(txt_file.stream.read().decode('utf-8'))
+
+
+def clean_text(text):
+  text = [line.replace('\t', ' ') for line in text.split('\n') if line]
   return ' '.join(text)

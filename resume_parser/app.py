@@ -19,5 +19,4 @@ def upload():
     keywords = request.form['keywords']
     resume_files = request.files.getlist("resumes[]")
     resumes = parse_batch(resume_files, keywords)
-    app.logger.info(resumes)
     return render_template('uploaded.html', keywords=keywords, resumes=resumes)
