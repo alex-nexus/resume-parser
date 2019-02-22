@@ -25,7 +25,6 @@ def convert_resume_to_text(resume_file):
   elif extension == '.docx' or extension == '.doc':
     text = convert_doc_to_text(resume_file)
   elif extension == '.txt':
-
     text = text
   return ' '.join(text.split())
 
