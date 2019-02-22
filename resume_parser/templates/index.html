@@ -15,12 +15,18 @@
       <hr>
       <form method="POST" enctype="multipart/form-data" action="/upload">
         <input type="hidden" name="csrfmiddlewaretoken" value="ABESTKTt7KuPL4GD">
-        <div id="resume" class="form-group">
-          <div class="">
+        <div class="row">
+          <div class="col-md-8">
+            <input type="text" name="keywords" class="form-control" placeholder="Keywords you would like to detect if present">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
             <input type="file" name="resumes[]" multiple required id="input_resumes">
           </div>
         </div>
-
+        <br>
         <button type="submit" id="upload" name="upload" class="btn btn-primary">Upload Resumes</button>
       </form>
     </div>

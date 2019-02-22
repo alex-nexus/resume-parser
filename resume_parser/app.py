@@ -16,7 +16,8 @@ def upload():
   app.logger.info('POST upload')
 
   if request.method == 'POST':
+    keywords = request.form['keywords']
     resume_files = request.files.getlist("resumes[]")
-    resumes = parse_batch(resume_files)
+    resumes = parse_batch(resume_files, keywords)
     app.logger.info(resumes)
-    return render_template('uploaded.html', resumes=resumes)
+    return render_template('uploaded.html', keywords=keywords, resumes=resumes)
