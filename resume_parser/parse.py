@@ -9,4 +9,6 @@ PROCESSES = 4
 def parse_batch(resume_files, keywords):
   texts = [convert_to_text(resume_file) for resume_file in resume_files]
   pool = mp.Pool(processes=PROCESSES)
-  return pool.map(Extractor().extract, texts)
+  resumes = pool.map(Extractor().extract, texts)
+  print(resumes)
+  return resumes

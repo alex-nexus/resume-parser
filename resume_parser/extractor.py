@@ -22,13 +22,27 @@ class Extractor:
         'email': self.extract_email(),
         'educations': self.extract_education(),
         'experiences': self.extract_experience(),
-        'github_url': '',
-        'linkedin_url': '',
+        'github_url': self.extract_github_url(),
+        'linkedin_url': self.extract_linkedin_url(),
         'mobile': self.extract_mobile_number(),
         'skills': self.extract_skills()
     }
 
   # private
+
+  def extract_github_url(self):
+    match = re.search(r"(github.com\/[\d\-\w]+)", self.text)
+    if match:
+      return match[0]
+    else:
+      return None
+
+  def extract_linkedin_url(self):
+    match = re.search(r"(linkedin.com\/in\/[\w\-\d]+)", self.text)
+    if match:
+      return match[0]
+    else:
+      return None
 
   def extract_email(self):
     '''
