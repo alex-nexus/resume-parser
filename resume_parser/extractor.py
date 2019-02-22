@@ -45,15 +45,10 @@ class Extractor:
       return None
 
   def extract_email(self):
-    '''
-    Helper function to extract email id from text
-
-    :param text: plain text extracted from resume file
-    '''
-    email = re.findall("([^@|\s]+@[^@]+\.[^@|\s]+)", self.text)
-    if email:
+    match = re.search(r'[\w\.-]+@[\w\.-]+',  self.text)
+    if match:
       try:
-        return email[0].split()[0].strip(';')
+        return match.group(0)
       except IndexError:
         return None
 
