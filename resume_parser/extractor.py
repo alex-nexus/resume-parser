@@ -20,8 +20,8 @@ class Extractor:
     return {
         'name': self.extract_name(),
         'email': self.extract_email(),
-        'educations': self.extract_education(),
-        'experiences': self.extract_experience(),
+        'educations': self.extract_educations(),
+        'experiences': self.extract_experiences(),
         'github_url': self.extract_github_url(),
         'linkedin_url': self.extract_linkedin_url(),
         'phone': self.extract_phone(),
@@ -100,27 +100,16 @@ class Extractor:
     nlp_text = nlp(self.text)
     noun_chunks = list(nlp_text.noun_chunks)
     tokens = [token.text for token in nlp_text if not token.is_stop]
-    data = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/skills.csv'))
-    skills = list(data.columns.values)
-    skillset = []
+
+    skills_data = pd.read_csv('data/skills.csv')
+    skills = list(skills_data.columns.values)
     # check for one-grams
-    for token in tokens:
-      if token.lower() in skills:
-        skillset.append(token)
-
+    skillset = [token for token in tokens if token.lower() in skills]
     # check for bi-grams and tri-grams
-    for token in noun_chunks:
-      token = token.text.lower().strip()
-      if token in skills:
-        skillset.append(token)
-    return [i.capitalize() for i in set([i.lower() for i in skillset])]
+    skillset += [token.text.lower().strip() for token in noun_chunks if token.text in skills]
+    return [skill.capitalize() for skill in set(skillset)]
 
-  def cleanup(token, lower=True):
-    if lower:
-      token = token.lower()
-    return token.strip()
-
-  def extract_education(self):
+  def extract_educations(self):
     '''
     Helper function to extract education from spacy nlp text
 
@@ -147,7 +136,7 @@ class Extractor:
         education.append(key)
     return education
 
-  def extract_experience(self):
+  def extract_experiences(self):
     '''
     Helper function to extract experience from resume text
 
