@@ -11,7 +11,7 @@ stop_words = stopwords.words('english')
 PROCESSES = 4
 
 
-def parse_batch(resume_files, keywords):
+def parse_batch(resume_files):
   texts = [convert_to_text(resume_file) for resume_file in resume_files]
   texts = [clean_text(text) for text in texts]
   pool = mp.Pool(processes=PROCESSES)

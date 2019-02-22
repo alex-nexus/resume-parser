@@ -17,6 +17,7 @@ def upload():
 
   if request.method == 'POST':
     keywords = request.form['keywords']
+    keywords = [keyword.strip() for keyword in keywords.lower().split(',')]
     resume_files = request.files.getlist("resumes[]")
-    resumes = parse_batch(resume_files, keywords)
+    resumes = parse_batch(resume_files)
     return render_template('uploaded.html', keywords=keywords, resumes=resumes)

@@ -19,9 +19,6 @@
             <th>Educations</th>
             <th>Experiences</th>
             <th class="w-25">Skills</th>
-            {% if keywords %}
-              <th>Keywords</th>
-            {% endif %}
             <th>Actions</th>
           </tr>
         </thead>
@@ -57,18 +54,13 @@
               </td>
               <td>
                 {% for skill in resume['skills'] %}
-                  <span class="badge badge-info">{{ skill }}</span>
+                  {% if skill.lower() in keywords %}
+                    <span class="badge badge-danger">{{ skill }}</span>
+                  {% else %}
+                    <span class="badge badge-info">{{ skill }}</span>
+                  {% endif %}
                 {% endfor %}
               </td>
-              {% if keywords %}
-                <td>
-                  <ul>
-                  {% for keyword in keywords.split(',') %}
-                    <li>{{ keyword }}: </li>
-                  {% endfor %}
-                  </ul>
-                </td>
-              {% endif %}
               <td></td>
             </tr>
           {% endfor %}
