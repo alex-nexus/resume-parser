@@ -9,7 +9,7 @@ from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
 
 
-def convert_resume_to_text(resume_file):
+def convert_to_text(resume_file):
   '''
   Wrapper function to detect the file extension and call text extraction function accordingly
 

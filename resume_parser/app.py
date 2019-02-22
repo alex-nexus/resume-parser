@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from resume_parser.parser import parse_batch
+from resume_parser.parse import parse_batch
 
 app = Flask(__name__)
 
