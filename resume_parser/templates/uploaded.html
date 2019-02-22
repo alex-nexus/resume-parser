@@ -30,7 +30,8 @@
             <tr>
               <td>
                 <div>{{ resume['name'] }}</div>
-                <div>{{ resume['email'] }}</div>
+                <div><a href="mailto:{{ resume['email'] }}">{{ resume['email'] }}</a></div>
+                <div><a href="tel:{{ resume['phone'] }}">{{ resume['phone'] }}</a></div>
               </td>
               <td>
                 {% if resume['github_url'] %}

@@ -24,7 +24,7 @@ class Extractor:
         'experiences': self.extract_experience(),
         'github_url': self.extract_github_url(),
         'linkedin_url': self.extract_linkedin_url(),
-        'mobile': self.extract_mobile_number(),
+        'phone': self.extract_phone(),
         'skills': self.extract_skills()
     }
 
@@ -72,7 +72,7 @@ class Extractor:
       span = nlp_text[start:end]
       return span.text
 
-  def extract_mobile_number(self):
+  def extract_phone(self):
     '''
     Helper function to extract mobile number from text
 
