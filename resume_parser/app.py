@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from resume_parser.parse import parse_batch
+from resume_parser import parser
 
 app = Flask(__name__)
 
@@ -19,5 +19,5 @@ def upload():
     keywords = request.form['keywords']
     keywords = [keyword.strip() for keyword in keywords.lower().split(',')]
     resume_files = request.files.getlist("resumes[]")
-    resumes = parse_batch(resume_files)
+    resumes = parser.parse_batch(resume_files)
     return render_template('uploaded.html', keywords=keywords, resumes=resumes)
