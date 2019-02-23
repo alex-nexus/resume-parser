@@ -9,9 +9,12 @@ from spacy.matcher import Matcher
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
+from resume_parser import data
 import resume_parser.constants as cs
 
 nlp = spacy.load('en_core_web_sm')
+schools = data.load_schools()
+majors = data.load_majors()
 
 
 class Extractor:
@@ -32,25 +35,15 @@ class Extractor:
 
   def extract_github_url(self):
     match = re.search(r"(github.com\/[\d\-\w]+)", self.text)
-    if match:
-      return match[0]
-    else:
-      return None
+    return match[0] if match else None
 
   def extract_linkedin_url(self):
     match = re.search(r"(linkedin.com\/in\/[\w\-\d]+)", self.text)
-    if match:
-      return match[0]
-    else:
-      return None
+    return match[0] if match else None
 
   def extract_email(self):
     match = re.search(r'[\w\.-]+@[\w\.-]+',  self.text)
-    if match:
-      try:
-        return match.group(0)
-      except IndexError:
-        return None
+    return match[0] if match else None
 
   def extract_name(self):
     '''
