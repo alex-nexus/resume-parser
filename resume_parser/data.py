@@ -1,4 +1,5 @@
 import csv
+from nltk.corpus import stopwords
 
 
 def load_schools():
@@ -6,12 +7,20 @@ def load_schools():
     csv_reader = csv.reader(csv_file, delimiter=',')
     schools = []
     for row in csv_reader:
-      schools += row[1]
+      schools += [row[1]]
   return schools
 
 
 def load_majors():
-  return []
+  with open('data/majors-list.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    majors = []
+    for row in csv_reader:
+      majors += [row[1].lower()]
+  return majors
 
 
-load_schools()
+# print(load_schools())
+STOPWORDS = set(stopwords.words('english'))
+MAJORS = load_majors()
+SCHOOLS = load_schools()

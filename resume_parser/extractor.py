@@ -4,17 +4,15 @@ import nltk
 import spacy
 import pandas as pd
 
-
+from collections import defaultdict
 from spacy.matcher import Matcher
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
-from resume_parser import data
+from resume_parser.data import STOPWORDS, MAJORS, SCHOOLS
 import resume_parser.constants as cs
 
 nlp = spacy.load('en_core_web_sm')
-schools = data.load_schools()
-majors = data.load_majors()
 
 
 class Extractor:
