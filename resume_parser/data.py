@@ -24,3 +24,8 @@ def load_majors():
 STOPWORDS = set(stopwords.words('english'))
 MAJORS = load_majors()
 SCHOOLS = load_schools()
+
+DEGREES = [
+    'BE', 'B.E.', 'B.E', 'BS', 'B.S', 'ME', 'M.E', 'M.E.', 'MS', 'M.S', 'BTECH', 'MTECH',
+    'SSC', 'HSC', 'CBSE', 'ICSE', 'PHD'
+]

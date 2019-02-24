@@ -21,3 +21,5 @@ def upload():
     resume_files = request.files.getlist("resumes[]")
     resumes = parser.parse_batch(resume_files)
     return render_template('uploaded.html', keywords=keywords, resumes=resumes)
+  else:
+    return render_template('index.html')

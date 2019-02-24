@@ -9,10 +9,13 @@ from spacy.matcher import Matcher
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
-from resume_parser.data import STOPWORDS, MAJORS, SCHOOLS
+from resume_parser.data import STOPWORDS, MAJORS, SCHOOLS, DEGREES
 import resume_parser.constants as cs
 
 nlp = spacy.load('en_core_web_sm')
+
+NAME_PATTERN = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
+YEARS = r'(((20|19)(\d{2})))'
 
 
 class Extractor:
@@ -53,7 +56,7 @@ class Extractor:
     '''
     nlp_text = nlp(self.text)
     matcher = Matcher(nlp.vocab)
-    pattern = [cs.NAME_PATTERN]
+    pattern = [NAME_PATTERN]
 
     matcher.add('NAME', None, *pattern)
 
@@ -109,23 +112,22 @@ class Extractor:
     '''
     nlp_text = nlp(self.text)
     nlp_text = [sent.string.strip() for sent in nlp_text.sents]
-    edu = {}
+
+    edu = defaultdict(list)
     # Extract education degree
     for index, text in enumerate(nlp_text):
       for tex in text.split():
         tex = re.sub(r'[?|$|.|!|,]', r'', tex)
-        if tex.upper() in cs.EDUCATION and tex not in cs.STOPWORDS:
-          edu[tex] = text + nlp_text[index + 1]
+        if tex.upper() in DEGREES:
+          edu[tex].append(text + nlp_text[index + 1])
 
     # Extract year
-    education = []
-    for key in edu.keys():
-      year = re.search(re.compile(cs.YEAR), edu[key])
-      if year:
-        education.append((key, ''.join(year.group(0))))
-      else:
-        education.append(key)
-    return education
+    for key, texs in edu.items():
+      for tex in texs:
+        year = re.search(re.compile(YEARS), tex)
+        if year:
+          edu[(key, ''.join(year.group(0)))] = edu.pop(key)
+    return edu
 
   def extract_experiences(self):
     '''
