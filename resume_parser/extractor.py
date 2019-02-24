@@ -120,14 +120,13 @@ class Extractor:
         tex = re.sub(r'[?|$|.|!|,]', r'', tex)
         if tex.upper() in DEGREES:
           edu[tex].append(text + nlp_text[index + 1])
-
-    # Extract year
-    for key, texs in edu.items():
-      for tex in texs:
-        year = re.search(re.compile(YEARS), tex)
-        if year:
-          edu[(key, ''.join(year.group(0)))] = edu.pop(key)
     return edu
+    # Extract year
+    # for key, texs in edu.items():
+    #   for tex in texs:
+    #     year = re.search(re.compile(YEARS), tex)
+    #     if year:
+    #       edu[(key, ''.join(year.group(0)))] = edu.pop(key)
 
   def extract_experiences(self):
     '''

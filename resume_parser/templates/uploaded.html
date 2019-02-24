@@ -39,11 +39,12 @@
                 {% endif %}
               </td>
               <td>
-                <ul>
-                {% for education in resume['educations'] %}
-                  <li>{{ education }}</li>
+                {% for education, details in resume['educations'].items() %}
+                  {{ education }}
+                    {% for detail in details %}
+                      <li>{{ detail }}</li>
+                    {% endfor %}
                 {% endfor %}
-                </ul>
               </td>
               <td>
                 <ul>
